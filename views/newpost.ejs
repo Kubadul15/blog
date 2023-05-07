@@ -1,9 +1,9 @@
 <%- include("header.ejs") %>
-
-<form action="newpost/submit" method="post">
+<form action="/newpost/submit" method="post">
     <input type="text" name="author" id="author" placeholder="Autor" required>
     <input type="text" name="title" id="title" placeholder="Tytuł" required>
     <textarea id="content" name="content" class="materialize-textarea" placeholder="Treść"></textarea required>
+    <input type="password" name="pin" id="pin" placeholder="PIN" required>
     <input type="submit" class="btn waves-effect waves-light blue lighten-4" value="Napisz">
 </form>
 
