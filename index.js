@@ -2,7 +2,7 @@ const express = require("express")
 const sqlite3 = require("sqlite3")
 const app = express()
 const db = new sqlite3.Database("database.db")
-const pin = 1234 // zmień ten pin dla bezpieczeństwa - możesz dać też hasło zwykłe, ale nie jest ono szyfrowane jak coś :)
+const pin = 1234 // zmień ten pin dla bezpieczeństwa na inny(nie musisz cyfer, mogą być dowolne znaki) - nie jest to szyfrowane ani nic więc odradzam używania prywatnych haseł itp
 db.exec(`
 CREATE TABLE IF NOT EXISTS Posts (
     id INTEGER  PRIMARY KEY,
