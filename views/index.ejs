@@ -1,3 +1,19 @@
 <%- include("header.ejs") %>
 
+
+<% for (const post of posts) { %>
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue lighten-2">
+            <div class="card-content white-text">
+              <span class="card-title"><%-post.title%></span>
+              <p><%-post.content%></p>
+            </div>
+            <div class="card-action">
+              <p>Napisane przez <%-post.author%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+<%}%>
 <%- include("footer.ejs") %>

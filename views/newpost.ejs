@@ -1,0 +1,10 @@
+<%- include("header.ejs") %>
+
+<form action="newpost/submit" method="post">
+    <input type="text" name="author" id="author" placeholder="Autor" required>
+    <input type="text" name="title" id="title" placeholder="Tytuł" required>
+    <textarea id="content" name="content" class="materialize-textarea" placeholder="Treść"></textarea required>
+    <input type="submit" class="btn waves-effect waves-light blue lighten-4" value="Napisz">
+</form>
+
+<%- include("footer.ejs") %>
