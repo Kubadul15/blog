@@ -15,17 +15,11 @@ CREATE TABLE IF NOT EXISTS Posts (
     content TEXT not null
 
 );`)
+
+
 app.set("view engine", "ejs")
 app.get("/", (req,res) => {
     res.render("index")
-})
-
-app.get("/users", (req,res) => {
-    res.render("users")
-})
-
-app.get("/posts", (req,res) => {
-    res.render("posts")
 })
 
 app.listen(3000, () =>console.log("Aplikacja działa na porcie 3000"))
