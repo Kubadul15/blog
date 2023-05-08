@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Posts (
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({extended: false}))
-
+app.use(express.static('public'))
 app.get("/", (req,res) => {
     const posts = db.all(`SELECT * FROM Posts ORDER BY id DESC`, (err, rows) =>{
         if(err){
