@@ -2,8 +2,15 @@ const express = require("express")
 const sqlite3 = require("sqlite3")
 const app = express()
 const db = new sqlite3.Database("database.db")
-const pin = 1234 // zmień ten pin dla bezpieczeństwa na inny(nie musisz cyfer, mogą być dowolne znaki) - nie jest to szyfrowane ani nic więc odradzam używania prywatnych haseł itp.
+const md5 = require("md5")
+
 db.exec(`
+CREATE TABLE IF NOT EXISTS Users (
+id INTEGER PRIMARY KEY,
+username TEXT not null,
+password TEXT not null
+);
+
 CREATE TABLE IF NOT EXISTS Posts (
     id INTEGER  PRIMARY KEY,
     author TEXT not null,
@@ -29,20 +36,50 @@ app.get("/newpost", (req,res) => {
     res.render("newpost")
 })
 
-app.get("/error/pin", (req,res) =>{
-    res.render("errorpin")
-})
 app.post("/newpost/submit", (req,res) =>{
-    if(req.body.pin != pin){
-        res.redirect("/error/pin")
-    }else{
-    const author = req.body.author
+    const username = req.body.username
+    const password = md5(req.body.password)
     const title = req.body.title
     const content = req.body.content
-    db.all(`INSERT INTO Posts(author, title, content)
-    VALUES('${author}', '${title}', '${content}');`)
-    res.redirect("/")
-    }})
+    db.all(`SELECT * From Users WHERE username = '${username}' AND password = '${password}';`, (err,rows) =>{
+        if(rows.length === 0){
+            res.redirect("/error/Wpisano niepoprawne dane logowania")
+        }else{
+        db.all(`INSERT INTO Posts(author, title, content)
+        VALUES('${username}', '${title}', '${content}');`)
+        res.redirect("/")
+        }
+    })
+})
 
+    app.get("/install", (req, res) => {
+        db.all(`SELECT * FROM Users`, (err,rows) =>{
+            if(err || rows.length != 0){
+                res.redirect("/")
+            }else{
+                res.render("install")
+            }
+        })
+    })
+    app.post("/install/submit", (req,res) =>{
+        db.all(`SELECT * FROM Users`, (err,rows) =>{
+            if(err || rows.length != 0){
+                res.redirect("/")
+            }else{
+        const username = req.body.username
+        const password = md5(req.body.password)
+        db.all(`INSERT INTO Users(username, password) VALUES ('${username}', '${password}')`, (err) =>{
+            if(err){
+                res.redirect("/error/Nie udało się utworzyć konta administratora, spróbuj ponownie")
+            }else{
+                res.redirect(`/info/Utworzono administratora ${username}`)
+            }
+            })
+        }})
+    })
+
+    app.get("/info/:code", (req,res) =>{
+        res.render("info", {code: req.params.code})
+    })
 
 app.listen(3000, () =>console.log("Aplikacja działa na porcie 3000"))
