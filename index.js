@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3")
 const app = express()
 const db = new sqlite3.Database("database.db")
 const md5 = require("md5")
-
+const port = process.env.PORT || 3000
 db.exec(`
 CREATE TABLE IF NOT EXISTS Users (
 id INTEGER PRIMARY KEY,
@@ -82,4 +82,4 @@ app.post("/newpost/submit", (req,res) =>{
         res.render("info", {code: req.params.code})
     })
 
-app.listen(3000, () =>console.log("Aplikacja działa na porcie 3000"))
+app.listen(port, () =>console.log("Aplikacja działa na porcie 3000"))
