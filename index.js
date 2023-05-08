@@ -150,6 +150,7 @@ app.post("/newpost/submit", (req,res) =>{
             const type = req.params.type
             if(type == "posts"){
                 db.all(`DELETE FROM Posts`)
+                res.redirect("/")
             }else if(type == "users"){
                 db.all(`DELETE FROM Users`)
                 res.redirect("/logout")
