@@ -82,4 +82,4 @@ app.post("/newpost/submit", (req,res) =>{
         res.render("info", {code: req.params.code})
     })
 
-app.listen(port, () =>console.log("Aplikacja działa na porcie 3000"))
+app.listen(port, () =>console.log(`Aplikacja działa na porcie ${port}`))
