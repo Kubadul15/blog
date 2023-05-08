@@ -78,6 +78,20 @@ app.post("/newpost/submit", (req,res) =>{
         }})
     })
 
+    app.get("/delete/:id/:username/:password", (req,res) =>{
+        const id = req.params.id
+        const username = req.params.username
+        const password = md5(req.params.password)
+        db.all(`SELECT * From Users WHERE username = '${username}' AND password = '${password}';`, (err,rows) =>{
+            if(rows.length === 0){
+                res.redirect("/info/Podano złe dane logowania")
+            }else{
+                db.all(`DELETE FROM Posts WHERE id='${id}'`)
+                res.redirect("/")
+            }
+        })
+    })
+
     app.get("/info/:code", (req,res) =>{
         res.render("info", {code: req.params.code})
     })
