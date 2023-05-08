@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Posts (
     id INTEGER  PRIMARY KEY,
     author TEXT not null,
     title TEXT not null,
-    content TEXT not null
+    content LONGTEXT not null
 
 );`)
 
