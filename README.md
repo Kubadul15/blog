@@ -6,6 +6,6 @@ Instalacja:
 2. npm install
 3. node index.js
 4. Utwórz konto administratora (localhost:3000/install)
-5. Po utworzeniu konta możesz stworzyć posta (localhost:3000/newpost)
-6. Posty można usuwać wpisując localhost:3000/delete/ID/nazwa użytkownika/hasło
-(ID jest w prawym dolnym rogu posta, a nazwę użytkownika i hasło podajesz taką samą jak przy rejestracji)
+5. Po utworzeniu konta kliknij w przycisk Zaloguj (lub wejdź na localhost:3000/login) i powinno śmigać
+
+W razie gdyby trzeba było zrobić reseta bazy danych wystarczy localhost:3000/cleardatabase/users lub localhost:3000/cleardatabase/posts zależy co wolisz (musisz być zalogowany na admina inaczej nie zadziała)
