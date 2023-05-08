@@ -4,13 +4,14 @@
 <% for (const post of posts) { %>
     <div class="row">
         <div class="col s12 m6">
-          <div class="card blue lighten-2">
-            <div class="card-content white-text">
+          <div class="card white posty">
+            <div class="card-content black-text">
               <span class="card-title"><%-post.title%></span>
               <p><%-post.content%></p>
             </div>
-            <div class="card-action">
-              <p>Napisane przez <%-post.author%></p>
+            <div class="card-action posty">
+              <a class="black-text">Napisane przez <%-post.author%></a>
+              <a class="right black-text"><%-post.id%></a>
             </div>
           </div>
         </div>
